@@ -1,69 +1,3 @@
-Skip to content
-Navigation Menu
-SURIYA RAJ K
-DEPTH-FIRST-SEARCH
-
-Type / to search
-Code
-Pull requests
-Actions
-Projects
-Security
-Insights
-You’re making changes in a project you don’t have write access to. Submitting a change will write it to a new branch in your fork suriyaraj23014049/DEPTH-FIRST-SEARCH, so you can send a pull request.
-DEPTH-FIRST-SEARCH
-/
-README.md
-in
-main
-
-Edit
-
-Preview
-Indent mode
-
-Spaces
-Indent size
-
-2
-Line wrap mode
-
-Soft wrap
-Editing README.md file contents
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
 # BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
 <h3>Name: SURIYA RAJ K</h3>
@@ -98,7 +32,139 @@ Push node 0 into queue and mark it visited.
 Step 3: Remove node 0 from the front of queue and visit the unvisited neighbours and push them into queue.
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/67d8fa3b-ce9e-46c2-9dd7-089e204e667a)
-Use Control + Shift + m to toggle the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
-No file chosen
-Attach files by dragging & dropping, selecting or pasting them.
-Editing DEPTH-FIRST-SEARCH/README.md at main · kabilanthiyagarajan/DEPTH-FIRST-SEARCH
+
+Step 4: Remove node 1 from the front of queue and visit the unvisited neighbours and push them into queue.
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/b0cf0fde-8a86-41cb-a054-36875ac24ab0)
+
+Step 5: Remove node 2 from the front of queue and visit the unvisited neighbours and push them into queue.
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8968a163-6b3a-4f7e-8ad4-bbf24f326b9b)
+
+Step 6: Remove node 3 from the front of queue and visit the unvisited neighbours and push them into queue. 
+As we can see that every neighbours of node 3 is visited, so move to the next node that are in the front of the queue.
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/7a1c1b16-ea69-497f-a099-8440200f6dc0)
+
+Steps 7: Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue. 
+As we can see that every neighbours of node 4 are visited, so move to the next node that is in the front of the queue.
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8e16ffa3-c3d6-4774-822b-6eb84adedad9)
+
+Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue.
+Now, Queue becomes empty, So, terminate these process of iteration.
+
+
+<hr>
+<h2>Algorithm:</h2>
+<hr>
+<ol>
+  <li>Construct a Graph with Nodes and Edges</li>
+ <li>Breadth First Uses Queue and iterates through the Queue for Traversal.</li>
+  <li>Insert a Start Node into the Queue.</li>
+<li>Find its Successors Or neighbors and Check whether the node is visited or not.</li>
+<li>If Not Visited, add it to the Queue. Else Continue.</li>
+<li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
+
+</ol>
+
+<hr>
+
+<h3>Program</h3>
+
+```python
+from collections import deque
+from collections import defaultdict
+
+
+'''
+V E
+FOR EVERY EDGE
+U V
+7 9
+A B
+A C 
+A F
+C E
+C F
+C D
+D E 
+D G
+G F
+'''
+def bfs(graph,start,visited,path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if visited[neighbour] == False:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+    return path
+
+graph = defaultdict(list)
+v,e = map(int,input().split())
+for i in range(e):
+    u,v = map(str,input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+
+if '0' in graph:
+    start = '0'
+else:
+    start = 'A'
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph,start,visited,path)
+print(traversedpath)
+```
+
+<h3>Sample Input</h3>
+<hr>
+7 9 <BR>
+A B <BR>
+A C <BR>
+A F <BR>
+C E <BR>
+C F <BR>
+C D <BR>
+D E <BR>
+D G <BR>
+G F <BR>
+<hr>
+<h3>Sample Output</h3>
+<hr>
+['A', 'B', 'C', 'F', 'E', 'D', 'G']
+
+<hr>
+
+<hr>
+<h3>Sample Input</h3>
+<hr>
+5 6 <BR>
+0 1 <BR>
+0 2 <BR>
+1 2 <BR>
+1 3 <BR>
+2 4 <BR>
+3 4 <BR>
+<hr>
+<h3>Sample Output</h3>
+<hr>
+['0', '1', '2', '3', '4']
+<hr>
+<h3>Result:</h3>
+<hr>
+<p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
+
+
+
+
+
+
+
+
